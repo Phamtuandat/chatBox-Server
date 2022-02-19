@@ -32,12 +32,7 @@ app.use((req, res, next) => {
 
     next()
 })
-app.all('*', function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With')
-    res.header('Access-Control-Allow-Headers', 'Content-Type')
-    next()
-})
+
 app.use('/api/auth', AuthRouter)
 app.use('/api/room', roomRouter)
 app.use('/api/chatRoom', chatRoomRouter)
