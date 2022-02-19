@@ -20,7 +20,7 @@ global.io = new Server(server, {
     },
 })
 require('dotenv').config()
-app.options('*', cors())
+app.use(cors())
 app.use(bodyParser.json())
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
