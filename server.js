@@ -22,16 +22,16 @@ global.io = new Server(server, {
 require('dotenv').config()
 app.use(cors())
 app.use(bodyParser.json())
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    )
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*')
+//     res.setHeader(
+//         'Access-Control-Allow-Headers',
+//         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//     )
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
 
-    next()
-})
+//     next()
+// })
 
 app.use('/api/auth', AuthRouter)
 app.use('/api/room', roomRouter)
@@ -47,14 +47,7 @@ app.use((error, req, res, next) => {
 })
 
 global.io.on('connection', webSocketIo.connection)
-process.once('SIGUSR2', function () {
-    process.kill(process.pid, 'SIGUSR2')
-})
 
-process.on('SIGINT', function () {
-    // this is only called on ctrl+c, not restart
-    process.kill(process.pid, 'SIGINT')
-})
 const PORT = 5000 || process.env.PORT
 if (process.env.NODE_ENV === 'production') {
     // set static folder
