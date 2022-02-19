@@ -16,7 +16,7 @@ const userRouter = require('./Routers/User-router')
 const cors = require('cors')
 global.io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: '*',
     },
 })
 require('dotenv').config()
