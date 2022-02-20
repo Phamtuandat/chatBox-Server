@@ -21,7 +21,6 @@ global.io = new Server(server, {
 })
 app.use(cors())
 require('dotenv').config()
-const whiteList = 'https://chat-box-client.vercel.app'
 app.use(bodyParser.json())
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -49,11 +48,11 @@ app.use((error, req, res, next) => {
 
 global.io.on('connection', webSocketIo.connection)
 
-const PORT = 5000 || process.env.PORT
-if (process.env.NODE_ENV === 'production') {
-    // set static folder
-    app.use(express.static('client/build'))
-}
+const PORT = process.env.PORT
+// if (process.env.NODE_ENV === 'production') {
+//     // set static folder
+//     app.use(express.static('client/build'))
+// }
 mongoose
     .connect(
         `mongodb+srv://${process.env.DB_HOST}:${process.env.DB_PASS}@cluster0.q1mbt.mongodb.net/mern?retryWrites=true&w=majority`
