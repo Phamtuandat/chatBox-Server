@@ -16,9 +16,10 @@ const userRouter = require('./Routers/User-router')
 const cors = require('cors')
 global.io = new Server(server, {
     cors: {
-        origin: 'https://chat-box-client.vercel.app',
+        origin: '*',
     },
 })
+app.use(cors())
 require('dotenv').config()
 const whiteList = 'https://chat-box-client.vercel.app'
 app.use(bodyParser.json())
@@ -33,34 +34,10 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(
-    '/api/auth',
-    cors({
-        origin: whiteList,
-    }),
-    AuthRouter
-)
-app.use(
-    '/api/room',
-    cors({
-        origin: whiteList,
-    }),
-    roomRouter
-)
-app.use(
-    '/api/chatRoom',
-    cors({
-        origin: whiteList,
-    }),
-    chatRoomRouter
-)
-app.use(
-    '/api/user',
-    cors({
-        origin: whiteList,
-    }),
-    userRouter
-)
+app.use('/api/auth', AuthRouter)
+app.use('/api/room', roomRouter)
+app.use('/api/chatRoom', chatRoomRouter)
+app.use('/api/user', userRouter)
 
 app.use((error, req, res, next) => {
     if (res.headerSent) {
