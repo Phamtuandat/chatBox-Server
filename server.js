@@ -16,22 +16,26 @@ const userRouter = require('./Routers/User-router')
 const cors = require('cors')
 global.io = new Server(server, {
     cors: {
-        origin: '*',
+        origin: 'https://chat-box-client.vercel.app',
     },
 })
 require('dotenv').config()
-app.use(cors())
+app.use(
+    cors({
+        origin: 'https://chat-box-client.vercel.app',
+    })
+)
 app.use(bodyParser.json())
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*')
-//     res.setHeader(
-//         'Access-Control-Allow-Headers',
-//         'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-//     )
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    )
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
 
-//     next()
-// })
+    next()
+})
 
 app.use('/api/auth', AuthRouter)
 app.use('/api/room', roomRouter)
