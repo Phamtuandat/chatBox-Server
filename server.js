@@ -20,11 +20,7 @@ global.io = new Server(server, {
     },
 })
 require('dotenv').config()
-app.use(
-    cors({
-        origin: 'https://chat-box-client.vercel.app',
-    })
-)
+const whiteList = 'https://chat-box-client.vercel.app'
 app.use(bodyParser.json())
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -37,7 +33,13 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/api/auth', AuthRouter)
+app.use(
+    cors({
+        origin: whiteList,
+    }),
+    '/api/auth',
+    AuthRouter
+)
 app.use('/api/room', roomRouter)
 app.use('/api/chatRoom', chatRoomRouter)
 app.use('/api/user', userRouter)
