@@ -34,15 +34,33 @@ app.use((req, res, next) => {
 })
 
 app.use(
+    '/api/auth',
     cors({
         origin: whiteList,
     }),
-    '/api/auth',
     AuthRouter
 )
-app.use('/api/room', roomRouter)
-app.use('/api/chatRoom', chatRoomRouter)
-app.use('/api/user', userRouter)
+app.use(
+    '/api/room',
+    cors({
+        origin: whiteList,
+    }),
+    roomRouter
+)
+app.use(
+    '/api/chatRoom',
+    cors({
+        origin: whiteList,
+    }),
+    chatRoomRouter
+)
+app.use(
+    '/api/user',
+    cors({
+        origin: whiteList,
+    }),
+    userRouter
+)
 
 app.use((error, req, res, next) => {
     if (res.headerSent) {
