@@ -21,9 +21,7 @@ const register = async (req, res, next) => {
         name,
         email,
         password: passwordHashed,
-        image:
-            image ||
-            'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftoppng.com%2Froger-berry-avatar-placeholder-PNG-free-PNG-Images_188599&psig=AOvVaw3VMa53IOZE658FjArxfPNV&ust=1634437882809000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNjOwt3xzfMCFQAAAAAdAAAAABAD',
+        image: image,
         rooms: [],
         collections: [],
     })
