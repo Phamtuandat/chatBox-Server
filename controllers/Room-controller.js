@@ -21,7 +21,7 @@ const createRoom = async (req, res, next) => {
     try {
         const sess = await mongoose.startSession()
         await sess.startTransaction()
-        const user = await (await User.findById(uid)).populate('rooms')
+        const user = await User.findById(uid).populate('rooms')
         await createRoom.save({ session: sess })
         user.rooms.push(createRoom)
         await user.save({ session: sess })

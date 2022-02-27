@@ -48,7 +48,7 @@ app.use((error, req, res, next) => {
 
 global.io.on('connection', webSocketIo.connection)
 
-const PORT = process.env.PORT
+const PORT = 5000
 // if (process.env.NODE_ENV === 'production') {
 //     // set static folder
 //     app.use(express.static('client/build'))
