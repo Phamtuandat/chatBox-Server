@@ -59,7 +59,7 @@ mongoose
     )
     .then(() => {
         server.listen(PORT, () => {
-            console.log('server is ready')
+            console.log('server is ready' + PORT)
         })
     })
     .catch((err) => {

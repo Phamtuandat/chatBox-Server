@@ -18,5 +18,10 @@ router.post(
     [check('email').not().isEmpty(), check('password').not().isEmpty()],
     AuthController.login
 )
+router.post(
+    '/signinWithGoogle',
+    [check('profileObj').not().isEmpty(), check('googleId').not().isEmpty()],
+    AuthController.loginWithGoogle
+)
 
 module.exports = router
