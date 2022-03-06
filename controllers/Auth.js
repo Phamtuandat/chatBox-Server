@@ -165,7 +165,7 @@ const loginWithGoogle = async (req, res, next) => {
         return next(err)
     }
     if (!user.image) {
-        user.updateOne({ $set: { image: imageUrl } })
+        await user.updateOne({ $set: { image: imageUrl } })
     }
     res.status(201).json({
         user: {
