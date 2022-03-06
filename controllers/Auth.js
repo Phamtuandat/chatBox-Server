@@ -144,7 +144,7 @@ const loginWithGoogle = async (req, res, next) => {
             return next(err)
         }
         newUser.save()
-        res.status(201).json({
+        return res.status(201).json({
             user: {
                 name: newUser.name,
                 email: newUser.email,
@@ -163,6 +163,9 @@ const loginWithGoogle = async (req, res, next) => {
     } catch (error) {
         const err = new HttpErr('Something went wrong, please try again', 500)
         return next(err)
+    }
+    if (!user.image) {
+        user.updateOne({ $push: { image: imageUrl } })
     }
     res.status(201).json({
         user: {
